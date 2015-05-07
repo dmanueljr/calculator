@@ -18,19 +18,17 @@ function startup() {
 	}
 
 var display = [];
+var postDisplay = "";
 var leftDisplay = [];
 var operator;
 
 function send(clickedId) {
-	
+
 	display.push(document.getElementById(clickedId).innerHTML);
-	if (display.length > 17) {
-		display.splice(17, 1);
+	if (display.length > 27) {
+		display.splice(27, 1);
 	}
-	if (display.length == 0 && operator) {
-		rightDisplay.push(document.getElementById(clickedId).innerHTML);
-	}
-	disp(); 
+	disp();
 }
 
 function back() {
@@ -44,7 +42,13 @@ function back() {
 }
 
 function evaluate(operatorID) {
-	if (display.length > 0) {
+//	alert("operator working!")
+	if (postDisplay > 0) {
+		leftDisplay.push(postDisplay);
+//		alert("postdisplay was pushed!");
+		operator = operatorID;
+//		alert("operatorID was set!");
+	} else if (display.length > 0) {
 		operator = operatorID;
 		for (var i = 0; i < display.length; i++) {
     		leftDisplay.push(display[i]);
@@ -64,10 +68,13 @@ function calc() {
 	var x = leftDisplay.join("");
 	var y = rightDisplay.join("");
 	var result = (x.concat() + getOperator() + y.concat());
-	alert(result);
-	alert(display);
-	alert(rightDisplay);
+//	alert(result);
+//	alert(display);
+//	alert(rightDisplay);
 	read.innerHTML = eval(result);
+	postDisplay = eval(result);
+//	alert(postDisplay);
+	// test to see if operator stays valid after calculation
 	display = [];
 	leftDisplay = [];
 	operator = "";
@@ -89,4 +96,3 @@ function getOperator() {
 
 window.addEventListener("load", startup);
 read = document.getElementById('view');
-
