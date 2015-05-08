@@ -71,8 +71,12 @@ function calc() {
 //	alert(result);
 //	alert(display);
 //	alert(rightDisplay);
-	read.innerHTML = eval(result);
-	postDisplay = eval(result);
+	if (eval(result) == undefined) {
+		read.innerHTML = 0;
+	} else {		
+		read.innerHTML = eval(result);
+		postDisplay = eval(result);
+	}
 //	alert(postDisplay);
 	// test to see if operator stays valid after calculation
 	display = [];
